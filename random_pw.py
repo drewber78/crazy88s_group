@@ -35,13 +35,26 @@ def generate_password(length):
 
 
 if __name__ == "__main__":
-    length = int(sys.argv[1])
-    result = generate_password(length)
-    try:
-        with open("generated_password.txt", "w") as f:
-            f.write(result)
-    except IOError as e:
-        print(f"Error writing to file: {e}")
-    finally:
-        f.close()
-        print(result)
+    if len(sys.argv) > 2:
+        if sys.argv[2] == "-microservice":
+            length = int(sys.argv[1])
+            result = generate_password(length)
+            print(result)
+            sys.exit(0)
+        try:
+            length = int(sys.argv[1])
+            result = generate_password(length)
+        except ValueError:
+            print("Please provide a valid integer for password length.")
+            sys.exit(1)
+    else:
+        length = int(sys.argv[1])
+        result = generate_password(length)
+        try:
+            with open("generated_password.txt", "w") as f:
+                f.write(result)
+        except IOError as e:
+            print(f"Error writing to file: {e}")
+        finally:
+            f.close()
+            print(result)

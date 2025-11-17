@@ -6,7 +6,7 @@ from time import sleep
 import os
 import subprocess
 import json
-import getpass
+
 
 
 def print_menu_in_box(title, menu_items):

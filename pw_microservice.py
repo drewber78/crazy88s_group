@@ -4,8 +4,8 @@ meets criteria.
 For CS361 Software Engineering I project.
 """
 
-import os
 import json
+import sys
 import getpass
 import subprocess
 
@@ -81,6 +81,19 @@ class MenuMicroservice:
         print_menu_in_box(title, menu_list)
 
 
+def json_builder(user_password=None, length=None, complexity_result=None):
+    """
+    Builds a json structure to return to a calling program.
+    """
+    # Return an empty JSON structure by default; modify as needed.
+    payload = {
+        "password": user_password,
+        "length": length,
+        "complexity_result": complexity_result}
+
+    return payload
+
+
 def print_menu_in_box(title, menu_items):
     """
     Prints a menu with a border around it.
@@ -154,4 +167,39 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # check sys.argv for microservice call
+    if sys.argv[1] == "-microservice":
+        # check if sys.argv[2] is present
+        check_arg = sys.argv[2]
+
+        if isinstance(check_arg, str):
+            if check_arg.isdigit():
+                try:
+                    length = sys.argv[2]
+                    generator = GeneratePassword(length)
+                    password = generator.create_password()
+                    print(password)
+                except FileNotFoundError:
+                    print("random_pw.py file not found.")
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+            else:
+                try:
+                    user_password = sys.argv[2]
+                    checker = GeneratePassword(0)
+                    result = checker.check_password(user_password)
+                    print(result)
+
+                except ValueError:
+                    print("Only integer lengths are acceptable for password"
+                          " generation.")
+                except IndexError:
+                    print("Please provide a length for password generation or "
+                          "a password to check.")
+                    sys.exit(1)
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+                    sys.exit(1)
+
+    else:
+        main()
