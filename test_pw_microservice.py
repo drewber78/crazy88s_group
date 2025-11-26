@@ -8,6 +8,7 @@ class TestPWMicroservice(unittest.TestCase):
     def test_01_create_password_length_and_complexity(self):
         sequence_length = [12, 13, 14, 15, 16, 17, 18, 19, 20]
         loop_length = random.randint(1, 10)
+        print(f"Loop length: {loop_length}")
 
         for i in range(loop_length):
             print(f"\nIteration: {i + 1}")
@@ -108,7 +109,7 @@ class TestPWMicroservice(unittest.TestCase):
         self.assertIn(cleaned_result, ("True", "False"))
         self.assertEqual(cleaned_result, "False")
         print("\n")
-        time.sleep(2)
+        # time.sleep(2)
 
 
 if __name__ == "__main__":
