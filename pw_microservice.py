@@ -4,7 +4,7 @@ meets criteria.
 For CS361 Software Engineering I project.
 """
 
-import json
+
 import sys
 import getpass
 import subprocess

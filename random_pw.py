@@ -6,9 +6,11 @@ import random
 import string
 import sys
 
+
 def generate_password(length):
     # if length < 8 or length > 20:
-    #     raise ValueError("Password length must be between 8 and 20 characters.")
+    #     raise ValueError("Password length must be between 8 and 20
+    # characters.")
 
     # Character sets
     lowercase = string.ascii_lowercase
@@ -39,7 +41,8 @@ if __name__ == "__main__":
         if sys.argv[2] == "-microservice":
             length = int(sys.argv[1])
             result = generate_password(length)
-            print(result)
+            cleaned_result = result.strip()
+            print(cleaned_result)
             sys.exit(0)
         try:
             length = int(sys.argv[1])
