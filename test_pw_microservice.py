@@ -14,7 +14,7 @@ class TestPWMicroservice(unittest.TestCase):
             print(f"\nIteration: {i + 1}")
             length = str(random.choice(sequence_length))
             generate = subprocess.run(['python', 'pw_microservice.py',
-                        '-microservice', length], 
+                        '-microservice', length],
                         capture_output=True, check=True)
             pwd = generate.stdout.decode().strip()
             self.assertIsInstance(pwd, str)
